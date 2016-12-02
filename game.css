@@ -1,4 +1,4 @@
-body
+body, main
 {
   background-color: #888;
   color: #fff;
@@ -26,4 +26,14 @@ body
   left: 20px;
   border: 2px solid #FFF;
   background-color: #A11;
+  z-index: 10;
+}
+
+.tailbit
+{
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: lightpink;
+  border-radius: 50%;
 }

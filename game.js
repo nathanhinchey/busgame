@@ -14,6 +14,8 @@
   var FIELD_HEIGHT = 500;
   var TICK_SPEED = 1;
   var MOVE_SPEED = 1;
+  var TAILBITS_MAX = 300;
+  var TAIL_TIME = 300;
 
   var field_top = BORDER_POS_TOP;
   var field_bottom = BORDER_POS_TOP + FIELD_HEIGHT;
@@ -26,6 +28,10 @@
   var player = busgame.player = document.getElementById('player');
   var field = busgame.field = document.getElementById('game-field');
   var pos = busgame.playerPos = {x: STARTING_X, y: STARTING_Y};
+
+  busgame.playspace = document.getElementById('playspace');
+  busgame.tailbits = [];
+  busgame.tailTimer = 0;
 
   // FUNCTIONS
 
@@ -54,10 +60,6 @@
     }
   };
 
-  busgame.update = function(){
-    busgame.playerMove()
-  };
-
   busgame.playerMove = function(){
     var new_x, new_y;
 
@@ -79,6 +81,38 @@
     }
 
     busgame.setPlayerPos(pos['x'],pos['y'])
+  };
+
+  busgame.isPlayerMoving = function(){
+    return busgame.moveUp || busgame.moveDown || busgame.moveLeft || busgame.moveRight;
+  };
+
+  busgame.leaveTailbit = function(){
+    if (busgame.isPlayerMoving()){
+      busgame.tailbits.unshift(document.createElement('div'));
+      busgame.tailbits[0].setAttribute("class", "tailbit");
+      busgame.tailbits[0].setAttribute("style", "top: " + pos['y'] + "px;" + "left: " + pos['x'] + "px;");
+      busgame.playspace.appendChild(busgame.tailbits[0]);
+    }
+  };
+
+  busgame.cleanUpTailPoint = function(){
+    busgame.tailTimer += 1;
+    if (busgame.tailbits.length === 0 ){
+      busgame.tailTimer = 0;
+    }
+    else if (busgame.tailTimer > TAIL_TIME){
+      busgame.playspace.removeChild(busgame.tailbits.pop());
+      if (!busgame.isPlayerMoving()){
+        busgame.playspace.removeChild(busgame.tailbits.pop());
+      }
+    }
+  };
+
+  busgame.update = function(){
+    busgame.playerMove();
+    busgame.leaveTailbit();
+    busgame.cleanUpTailPoint();
   };
 
   // STARTING CONDITIONS
