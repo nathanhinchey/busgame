@@ -1,0 +1,27 @@
+body
+{
+  background-color: #888;
+  color: #fff;
+  position: absolute;
+  margin: 0;
+}
+
+#game-field
+{
+  width: 500px;
+  height: 500px;
+  border: 4px solid #000;
+  background-color: #444;
+}
+
+#player
+{
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border: 2px solid #FFF;
+  background-color: #A11;
+}
