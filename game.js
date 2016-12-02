@@ -74,17 +74,7 @@
     }
     if (busgame.moveRight){
       new_x = pos['x'] + MOVE_SPEED;
-      var player_crashing = new_x >= field_right + PLAYER_WIDTH;
-      if (player_crashing){
-        console.console.log("crash");
-        pos['x'] = field_right;
-      }
-      else {
-        console.console.log("no crash");
-        pos['x'] = new_x;
-      }
-      console.log("field_right = " + field_right)
-      console.log("pos['x'] = " + pos['x'])
+      new_x < field_right ? pos['x'] = new_x : pos['x'] = field_right;
     }
     
     busgame.setPlayerPos(pos['x'],pos['y'])

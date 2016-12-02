@@ -1,1 +1,1 @@
-A game to keep my less bored on the bus
+A game to keep me less bored on the bus
