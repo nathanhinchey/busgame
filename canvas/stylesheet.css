@@ -8,8 +8,6 @@ html, body, canvas
 
 canvas
 {
-  margin: 0;
-  padding: 0;
-  border: none;
+  cursor:crosshair;
   background-color: #222;
 }
